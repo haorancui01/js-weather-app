@@ -15,7 +15,7 @@ export const getWeather = (lat, lon, timezone) => {
             return {
                 current: parseCurrentWeather(data),
                 daily: parseDailyWeather(data),
-                //hourly: parseHourlyWeather(data),
+                hourly: parseHourlyWeather(data),
             }
         })
 }
@@ -31,23 +31,40 @@ const parseDailyWeather = ({ daily }) => {
 }
 
 const parseHourlyWeather = ({hourly, current_weather}) => {
+    
+    //debug
+    // console.log(`hourly: ${hourly}`);
+    // console.log(`hourly dubug: ${JSON.stringify(hourly, null, 2)}`);
+    console.dir(hourly);
+    console.log(current_weather);
     return hourly.time.map((time, index) => {
+
+        //debug
+        // console.log(time); // add this
+        // console.log(index); // add this
+        // console.log(hourly.weathercode[index]); // add this
+        // console.log(hourly.temperature_2m[index]); // add this
+        // console.log(hourly.apparent_temperature[index]); // add this
+        // console.log(hourly.windspeed_10m[index]); // add this
+        // console.log(hourly.precipitation[index]); // add this
+        
         return {
             timestamp: time * 1000,
-            iconCode: hourly.weatherCode[index],
+            iconCode: hourly.weathercode[index],
             temp: Math.round(hourly.temperature_2m[index]),
             feelsLike: Math.round(hourly.apparent_temperature[index]),
-            windSpeed: Math.round(hourly.windSpeed_10m[index]),
+            windSpeed: Math.round(hourly.windspeed_10m[index]),
             precip: Math.round(hourly.precipitation[index] * 100) / 100,
         }
     }).filter(({ timestamp }) => timestamp >= current_weather.time * 1000)
 }
 
+
 const parseCurrentWeather = ({ current_weather, daily}) => {
     const { 
         temperature: currentTemp,
         windSpeed: windSpeed,
-        weatherCode: iconCode,
+        weathercode: iconCode,
      } = current_weather
      
      const {
@@ -56,11 +73,11 @@ const parseCurrentWeather = ({ current_weather, daily}) => {
         apparent_temperature_max: [maxFeelsLike],
         temperature_2m_min: [minFeelsLike],
         precipitation_sum: [precip],
-
      } = daily
 
      //const maxTemp = daily.temperature_2m_max[0];
 
+     console.log(current_weather, daily);
 
     return {
         currentTemp: Math.round(currentTemp),

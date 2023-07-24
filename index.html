@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Weather App</title>
   </head>
-  <body>
+  <body class="blurred">
     <script type="module" src="/main.js"></script>
 
     <header class="header">
       <div class="header-left">
-        <img class="weather-icon large" src="icons/sun.svg" data-current-icon alt="">
+        <img class="weather-icon large" src="icons/sun.svg" data-current-icon >
         <div class="header-current-temp">
           <span data-current-temp>31</span>&deg;
         </div>
       </div>
       <div class="header-right">
-        <div class="infor-group">
+        <div class="info-group">
           <div class="lable">High</div>
           <div><span data-current-high>32</span></div>
         </div>
-        <div class="infor-group">
+        <div class="info-group">
           <div class="lable">FL High</div>
           <div><span data-current-fl-high>27</span></div>
         </div>
-        <div class="infor-group">
+        <div class="info-group">
           <div class="lable">Wind</div>
           <div><span data-current-wind>9</span><span class="value-sub-info">mph</span></div>
-        </div><div class="infor-group">
+        </div><div class="info-group">
           <div class="lable">Low</div>
           <div><span data-current-low>19</span></div>
-        </div><div class="infor-group">
+        </div><div class="info-group">
           <div class="lable">FL Low</div>
           <div><span data-current-fl-low>12</span></div>
-        </div><div class="infor-group">
+        </div><div class="info-group">
           <div class="lable">Precip</div>
           <div><span data-current-precip>0.1</span ><span class="value-sub-info">in</span></div>
         </div>
@@ -302,19 +302,19 @@
       </tbody>
     </table>
 
-    <template class="day-card-template">
+    <template id="day-card-template">
       <div class="day-card">
-        <img date-icon class="weather-icon">
+        <img data-icon class="weather-icon">
         <div class="day-card-day" data-date></div>
         <div><span data-temp></span><span>&deg;</span></div>
       </div>
     </template>
 
-    <template class="hour-row-template">
+    <template id="hour-row-template">
       <tr class="hour-row">
         <td>
           <div class="info-group">
-            <div class="lable" data-date></div>
+            <div class="lable" data-day></div>
             <div data-time></div>
           </div>
         </td>
